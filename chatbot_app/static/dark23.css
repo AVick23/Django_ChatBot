@@ -1,0 +1,806 @@
+body {
+    font-family: 'Golos', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    background-color: #1e1e1e;
+    border-bottom: 1px solid #3c4257; /* Добавьте эту строку */
+    position: fixed;
+    top: 0;
+    width: 98%;
+    z-index: 1;
+}
+
+.header .menu-link {
+    color: #f4f4f4;
+    text-decoration: none;
+    font-size: 1em;
+    padding: 1em 1em;
+    margin-right: 1em;
+    border: 1px solid transparent;
+    border-radius: 0.5em;
+    transition: all 0.3s ease;
+    margin-top: 1em;
+}
+
+.header .menu-link:hover {
+    color: #858a92;
+}
+
+.chat-container {
+    color: #1e1e1e;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.chatbox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 60px; /* Отступ сверху от шапки */
+    margin-bottom: 100px; /* Отступ снизу от messageForm */
+    overflow: auto;
+    padding: 1.25em;
+    border-radius: 0.625em;
+    background-color: #1e1e1e;
+}
+
+@media (max-width: 40em) {
+    .chatbox {
+        padding: 1em;
+    }
+}
+
+.message {
+    margin: 0.625em 0;
+    font-size: 1.10em;
+    line-height: 1.5;
+    padding: 0.9375em;
+    border-radius: 0.9375em;
+    transition: transform 0.3s ease;
+    color: #f4f4f4;
+    max-width: 60%;
+    opacity: 0;
+    transform: translateY(1.25em);
+    animation: slideIn 0.7s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(1.25em);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message:hover {
+    transform: translateY(-0.3125em);
+}
+
+.user-signature {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.bot-signature {
+    align-self: flex-start;
+    text-align: left;
+}
+
+.message.user {
+    color: #f4f4f4;
+    background-color: #232935;
+    border-top-right-radius: 0.0625em;
+    border-bottom-right-radius: 1.25em;
+    align-self: flex-end;
+}
+
+.message.bot {
+    align-self: flex-start;
+    background-color: #33384a;
+    border-top-left-radius: 0.0625em;
+    border-bottom-left-radius: 1.25em;
+    color: #f4f4f4;
+}
+
+.messageForm {
+    display: flex;
+    justify-content: center;
+    background-color: #1e1e1e; /* Добавьте задний белый фон */
+    border-top: 1px solid #3c4257; /* Добавьте полоску, аналогичную шапке */
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+} 
+
+.inputContainer {
+    position: relative;
+    width: 50%;
+}
+
+.messageInput {
+    flex-grow: 0;
+    width: 88%;
+    height: 70%;
+    padding: 0.5em;
+    padding-left: 4em; /* Увеличиваем отступ слева, чтобы сделать место для иконки */
+    border: none;
+    border-radius: 0.5em;
+    font-size: 1em;
+    background-color: #3c4257;
+    border: 0.03em solid #394358;
+    transition: border-color 0.3s ease;
+    margin-right: 0.300em;
+    transition: all 0.3s ease;
+    color: #f4f4f4;
+}
+
+.messageInput:focus {
+    border-color: #3c4257;
+    outline: none;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 1.7em; /* Относительно родительского контейнера */
+    top: 45%;
+    transform: translateY(-50%);
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.messageInputTap {
+    width: 70%;
+    height: 50%;
+    padding: 10px; /* внутренний отступ вокруг текста внутри поля ввода */
+    border-radius: 5px; /* закругление углов поля ввода */
+    font-size: 0.8em; /* размер шрифта текста внутри поля ввода */
+    margin-top: 5px; /* отступ сверху */
+    box-sizing: border-box; /* учитываем ширину границ и отступов в общей ширине элемента */
+    background-color: #f4f4f4;
+    color: #38424f;
+    border: none;
+}
+    
+.messageInputTap:focus {
+outline: none;
+}
+
+#vec img {
+    width: 1.5em;  /* Ширина изображения */
+    height: 1.5em; /* Высота изображения */
+}
+
+.submitBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Распределение элементов по всей ширине кнопки */
+    padding: 0.5em 1em;
+    background-color: #232935;
+    color: #f4f4f4;
+    border: 1px solid #394358;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease; /* Добавление перехода для всех свойств */
+    margin-left: 0.625em;
+}
+
+.submitBtn:hover {
+    background-color: #1762ad;
+    color: #f4f4f4;
+}
+
+.submitBtn .text {
+    margin-right: 0.5em;
+}
+
+.submitBtn .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em; /* Установка ширины иконки */
+    height: 2em; /* Установка высоты иконки */
+    background-color: #3a84f3;
+    padding: 0.2em;
+    border-radius: 0.5em;
+    color: #fff;
+    transition: all 0.3s ease; /* Добавление перехода для всех свойств */
+}
+
+.submitBtn:hover .icon {
+    background-color: #2f73b7; /* Изменение цвета фона иконки при наведении на кнопку */
+}
+
+.menu-button {
+    width: 4.125em; /* Вы можете изменить это значение, чтобы изменить размер кнопки */
+    height: 4.125em; /* Убедитесь, что это значение совпадает с шириной, чтобы сделать кнопку квадратной */
+    border: none;
+    border-radius: 16px; /* Это значение определяет скругление углов */
+    background-color: #3a84f3;
+    cursor: pointer;
+    margin-right: 0.625em;
+    transition: background-color 0.3s ease;
+    position: relative;
+}
+
+.menu-button:hover {
+    background-color: #1370B9;
+}
+
+.menu-button::before {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translateY(-50%);
+    box-shadow: 0 8px 0 0 white, 0 -8px 0 0 white;
+}
+
+.custom-button {
+    background-color: #3a84f3;
+    border: none;
+    color: #f4f4f4;
+    padding: 0.625em 1.25em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.875em;
+    margin: 0.25em 0.125em;
+    cursor: pointer;
+    border-radius: 0.75em;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #1370B9;
+}
+
+br {
+    display: block;
+}
+
+.input-field {
+    width: 80%;
+    padding: 0.625em;
+    margin-top: 0.625em;
+    border: none;
+    outline: none;
+    box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+}
+
+.info-icon {
+    cursor: pointer;
+    color: #f4f4f4;
+    margin-left: 0.125em;
+    padding: 0.625em;
+    background-color: rgba(11, 147, 246, 0.1);
+    border-radius: 40%;
+    font-style: normal;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #1e1e1e;
+    color: #f4f4f4;
+    margin: 15% auto;
+    padding: 1.25em;
+    width: 80%;
+}
+
+#mic img {
+    width: 2.5em;  /* Ширина изображения */
+    height: 2.5em; /* Высота изображения */
+}
+
+.micro-btn {
+    border: 1px solid #394358;
+    background: #232935;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    transition: background-color 0.3s ease;
+    margin-left: 0.525em;
+}
+
+.micro-btn:hover {
+    background-color: #1863af;
+}
+
+.micro-btn img {
+    transition: all 0.3s ease;
+}
+
+.micro-btn:hover img {
+    content: url("static/Micro_white.png");
+}
+
+.toggle-button {
+    position: relative;
+    overflow: hidden;
+    width: 64px;
+    height: 36px;
+    border-radius: 25px;
+    background-color: #3a4055;
+    transition: background-color 0.3s;
+    border: none;
+}
+
+.sun, .moon {
+    position: absolute;
+    top: 5px; /* Центрируем иконку вертикально */
+    width: 20px; /* Уменьшаем размер иконки */
+    height: 20px; /* Уменьшаем размер иконки */
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.sun {
+    left: 0;
+    background: url("static/sun2.png") no-repeat center;
+    background-size: cover;
+    background-color: #ffffff; /* Добавляем белую подложку для иконки солнца */
+    border: 3px solid #ffffff;
+    margin-left: 2px;
+}
+
+.moon {
+    left: 40px;
+    background: url("static/moon2.png") no-repeat center;
+    background-size: cover;
+    background-color: #232935;
+    border: 3px solid #232935;
+    margin-right: 1px;
+}
+
+/* Стили для стрелочки */
+.scroll-to-bottom {
+display: none;
+position: fixed; /* Делаем элемент фиксированным */
+bottom: 20px;
+right: 20px;
+background-color: #3a84f3;
+color: #f4f4f4;
+width: 40px;
+height: 40px;
+text-align: center;
+line-height: 40px;
+cursor: pointer;
+border-radius: 0.75em;
+z-index: 1;
+}
+
+/* Стили для иконки стрелки */
+.fa-arrow-down {
+font-size: 20px;
+}
+
+/* Ваш файл стилей CSS */
+.my-images-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.my-images-container img {
+    max-width: 100px; /* Максимальная ширина изображения */
+    max-height: 100px; /* Максимальная высота изображения */
+    margin: 5px; /* Отступ между изображениями */
+    cursor: pointer; /* Изменение курсора при наведении на изображение */
+}
+
+.my-custom-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow: auto;
+    animation: fadeIn 0.5s ease; /* Продолжительность анимации 0.5 секунды с эффектом ease */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Стили для контента в модальном окне */
+.my-modal-content {
+    display: block;
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Располагаем контент на 50% от верхней границы */
+    left: 50%; /* Располагаем контент на 50% от левой границы */
+    transform: translate(-50%, -50%); /* Сдвигаем контент на половину его ширины и высоты */
+    max-width: 90%;
+    max-height: 90%;
+}
+
+/* Стили для изображения в модальном окне */
+.my-modal-content img {
+    display: block;
+    width: 100%; /* Ширина изображения займет всю доступную ширину контента */
+    height: auto; /* Автоматическая высота для сохранения пропорций */
+    margin: auto; /* Центрируем изображение в контейнере */
+}
+
+/* Стили для кнопки закрытия */
+.my-close {
+position: absolute;
+top: 10px;
+right: 25px;
+color: #f4f4f4;
+font-size: 30px;
+font-weight: bold;
+cursor: pointer;
+}
+
+/* Стили для контейнера текста */
+.my-text-container {
+    position: absolute; /* Абсолютное позиционирование */
+    top: 50%; /* Располагаем контейнер на 50% от верхней границы */
+    left: 50%; /* Располагаем контейнер на 50% от левой границы */
+    transform: translate(-50%, -50%); /* Сдвигаем контейнер на половину его ширины и высоты */
+    text-align: center; /* Выравниваем текст по центру */
+    padding: 20px; /* Добавляем отступы */
+    background-color: #1e1e1e; /* Цвет фона */
+    border-radius: 10px; /* Скругляем углы */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавляем тень */
+    color: #f4f4f4;
+}
+
+/* Стили для текста внутри модального окна */
+.my-text {
+    font-size: 14px;
+}
+
+
+.my-close:hover,
+.my-close:focus {
+color: #bbb;
+text-decoration: none;
+cursor: pointer;
+}
+
+.custom-download-button {
+    /* Ваш стиль для кнопки */
+    font-size: 20px; /* Пример размера */
+    position: absolute;
+    top: 90%;
+    right: 1%; /* Устанавливаем кнопку справа и сверху от родительского контейнера в 5% */
+    /* Другие стили */
+}
+
+.my-custom-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Распределение элементов по всей ширине кнопки */
+    padding: 0.5em 1em;
+    background-color: #232935;
+    color: #f4f4f4;
+    border: 1px solid #394358;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease; /* Добавление перехода для всех свойств */
+    margin-left: 0.625em;
+}
+
+.my-custom-button:hover {
+    background-color: #1762ad;
+    color: #f4f4f4;
+}
+
+.my-custom-button .text {
+    margin-right: 0.5em;
+}
+
+.my-custom-button .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em; /* Установка ширины иконки */
+    height: 2em; /* Установка высоты иконки */
+    background-color: #3a84f3;
+    padding: 0.2em;
+    border-radius: 0.5em;
+    color: #fff;
+    transition: all 0.3s ease; /* Добавление перехода для всех свойств */
+}
+
+.my-custom-button:hover .icon {
+    background-color: #2f73b7; /* Изменение цвета фона иконки при наведении на кнопку */
+}
+
+/* Оверлей */
+#myOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5); /* Полупрозрачный черный фон */
+    z-index: 9998; /* Положите оверлей под модальное окно */
+}
+
+/* Стили для всех ссылок на странице, включая созданные с помощью JavaScript */
+a {
+color: #3a84f3; /* Устанавливаем цвет для всех ссылок */
+text-decoration: none; /* Убираем подчеркивание у всех ссылок */
+}
+
+/* Стили для наведения на ссылки */
+a:hover {
+color: #0056b3; /* Изменяем цвет при наведении на ссылку */
+}
+
+::-webkit-scrollbar {
+width: 10px; /* Ширина скроллбара */
+}
+
+/* Стили для трека скроллбара (фон) */
+::-webkit-scrollbar-track {
+background: #1e1e1e; /* Цвет фона трека */
+}
+
+/* Стили для ползунка скроллбара (полосы прокрутки) */
+::-webkit-scrollbar-thumb {
+background: #3a84f3; /* Цвет ползунка */
+border-radius: 10px;
+}
+
+/* Стили для ползунка скроллбара при наведении */
+::-webkit-scrollbar-thumb:hover {
+background: #1370B9; /* Измененный цвет при наведении */
+}
+
+/* Добавляем медиазапрос для устройств с шириной экрана до 768px */
+@media (max-width: 768px) {
+    .header {
+        padding: 0.5em;
+    }
+
+    .header .menu-link {
+        padding: 0.5em;
+        font-size: 0.9em;
+    }
+
+    .chatbox {
+        padding: 1em;
+    }
+
+    .message {
+        font-size: 0.9em;
+        padding: 0.75em;
+        max-width: 80%; /* Уменьшаем максимальную ширину сообщений */
+    }
+
+    .messageInput {
+        width: 80%; /* Уменьшаем ширину поля ввода на маленьких экранах */
+        padding-left: 3em;
+        font-size: 0.9em;
+    }
+
+    .inputIcon {
+        display: none; /* Удаляем иконку из поля ввода */
+    }
+
+    .submitBtn {
+        padding: 0.4em 0.8em;
+        font-size: 0.9em;
+    }
+
+    .custom-button {
+        font-size: 0.9em;
+    }
+
+    .menu-button {
+        width: 3em;
+        height: 3em;
+    }
+
+    .info-icon {
+        padding: 0.4em;
+        font-size: 0.9em;
+    }
+
+    .micro-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .toggle-button {
+        width: 56px;
+        height: 32px;
+    }
+
+    .sun,
+    .moon {
+        width: 16px;
+        height: 16px;
+        top: 4px;
+        left: 0;
+    }
+
+    .moon {
+        left: 36px;
+    }
+}
+
+/* Добавляем медиазапрос для устройств с шириной экрана до 360px */
+@media (max-width: 400px) {
+    /* Общие стили для маленьких экранов */
+    .body {
+        font-size: 14px;
+    }
+
+    .header {
+        padding: 0.5em;
+        width: 95%;
+    }
+
+    .header h1 {
+        font-size: 1.5em;
+    }
+
+    .menu-link {
+        display: none;
+    }
+
+    .chat-container {
+        padding: 0;
+    }
+
+    .chatbox {
+        max-width: 90%;
+        padding: 0.8em;
+        margin-top: 60px; /* Отступ сверху от шапки */
+        margin-bottom: 80px; /* Отступ снизу от messageForm */
+    }
+
+    .message {
+        max-width: 90%;
+        font-size: 0.85em;
+        padding: 0.7em;
+        margin: 0.625em 0;
+    }
+
+    .user-signature, .bot-signature {
+        font-size: 0.8em;
+    }
+
+    .messageForm {
+        padding-top: 0.8em;
+    }
+
+    .inputContainer {
+        width: 70%;
+    }
+
+    .messageInput {
+        width: 93%;
+        font-size: 0.9em;
+        padding: 0.5em;
+    }
+
+    .inputIcon {
+        display: none; /* Удаляем иконку из поля ввода */
+    }
+
+    .submitBtn {
+        padding: 0.5em 0.8em;
+        margin-left: 0.2em;
+        margin-right: 1.6em;
+        width: 40px;
+        height: 40px;
+        padding: 0em 0.400em;
+    }
+    
+    .submitBtn .text {
+        display: none;
+    }
+    
+    .submitBtn .icon {
+        width: 1.5em;
+        height: 1.5em;
+    }
+
+    .menu-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    .micro-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        margin-left: 0.3em;
+    }
+
+    .toggle-button {
+        width: 55px;
+        height: 25px;
+    }
+
+    .sun, .moon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .info-icon {
+        font-size: 0.8em;
+        padding: 0.4em;
+    }
+
+    .modal-content {
+        margin: 10% auto;
+        padding: 0.8em;
+    }
+
+    .scroll-to-bottom {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+        line-height: 30px;
+        bottom: 5px;
+        right: 5px;
+        top: 470px;
+    }
+
+    .custom-button {
+        font-size: 0.8em;
+        padding: 0.4em 0.8em;
+    }
+
+    .fa-arrow-down {
+        font-size: 14px;
+    }
+
+    .my-images-container img {
+        max-width: 30px; /* Максимальная ширина изображения */
+        max-height: 30px; /* Максимальная высота изображения */
+    }
+} 
