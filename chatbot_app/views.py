@@ -10,9 +10,9 @@ from django.http import JsonResponse, FileResponse, StreamingHttpResponse
 from zipfile import ZipFile, ZIP_DEFLATED
 from io import BytesIO
 from tempfile import TemporaryDirectory
-from NLP import question_answer_pairs
-from searh_directions import search_directions_strict, search_directions_flexible, get_direction_data
-from save_questions import save_question_to_db, search_similar_questions, get_answer_for_question
+from py_files.NLP import question_answer_pairs
+from py_files.searh_directions import search_directions_strict, search_directions_flexible, get_direction_data
+from py_files.save_questions import save_question_to_db, search_similar_questions, get_answer_for_question
 
 db_path = "university.sqlite"
 

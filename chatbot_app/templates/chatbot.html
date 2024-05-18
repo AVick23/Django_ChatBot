@@ -884,13 +884,13 @@
             <img class="my-modal-content" id="myModalImg">
         </div>
     </div>
-    <script src="{% static 'script.js' %}"></script>
-    <script src="{% static 'For_messages.js' %}"></script>
-    <script src="{% static 'Micro.js' %}"></script>
-    <script src="{% static 'Menu.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/For_messages.js' %}"></script>
+    <script src="{% static 'js/Micro.js' %}"></script>
+    <script src="{% static 'js/Menu.js' %}"></script>
     <script>
-        const darkCssPath = "{% static 'dark23.css' %}";
-        const lightCssPath = "{% static 'light.css' %}";
+        const darkCssPath = "{% static 'css/dark23.css' %}";
+        const lightCssPath = "{% static 'css/light.css' %}";
 
         toggleButton.addEventListener('click', function() {
             const currentTheme = document.documentElement.getAttribute('data-theme');

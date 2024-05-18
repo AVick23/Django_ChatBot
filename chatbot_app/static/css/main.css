@@ -1,3 +1,29 @@
+.progress-container {
+    width: 60%;
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    width: 0;
+    height: 20px;
+    background-color: #11519c;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    border-radius: 5px;
+}
+
+.progress-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+
 body {
     font-family: 'Golos', sans-serif;
     margin: 0;
@@ -309,28 +335,6 @@ br {
     font-style: normal;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
-
-.modal-content {
-    background-color: #E5E5EA;
-    color: #000;
-    margin: 15% auto;
-    padding: 1.25em;
-    border: 0.0625em solid #888;
-    width: 80%;
-    border-radius: 0.9375em;
-}
-
 #mic img {
     width: 2.5em;  /* Ширина изображения */
     height: 2.5em; /* Высота изображения */
@@ -357,7 +361,7 @@ br {
 }
 
 .micro-btn:hover img {
-    content: url('static/Micro_white.png');
+    content: url('icon/Micro_white.png');
 }
 
 .toggle-button {
@@ -365,23 +369,24 @@ br {
     overflow: hidden;
     width: 64px;
     height: 36px;
+    border-radius: 25px;
     background-color: #e7e9ed;
     transition: background-color 0.3s;
-    border: none; /* Убираем границу */
-}
+    border: none;
+  }
 
 .sun, .moon {
     position: absolute;
-    top: 5px;
-    width: 20x;
-    height: 20px;
+    top: 5px; /* Центрируем иконку вертикально */
+    width: 20px; /* Уменьшаем размер иконки */
+    height: 20px; /* Уменьшаем размер иконки */
     border-radius: 50%;
     transition: all 0.3s;
 }
 
 .sun {
     left: 0;
-    background: url("static/sun2.png") no-repeat center;
+    background: url("icon/sun2.png") no-repeat center;
     background-size: cover;
     background-color: #ffffff; /* Добавляем белую подложку для иконки солнца */
     border: 3px solid #ffffff;
@@ -390,7 +395,7 @@ br {
 
 .moon {
     left: 40px;
-    background: url("static/moon2.png") no-repeat center;
+    background: url("icon/moon2.png") no-repeat center;
     background-size: cover;
     background-color: #232935;
     border: 3px solid #232935;
@@ -561,6 +566,7 @@ cursor: pointer;
     background-color: #2f73b7; /* Изменение цвета фона иконки при наведении на кнопку */
 }
 
+
 /* Оверлей */
 #myOverlay {
     display: none;
@@ -584,6 +590,7 @@ a:hover {
 color: #1370B9; /* Изменяем цвет при наведении на ссылку */
 }
 
+/* Стили для скроллбара */
 ::-webkit-scrollbar {
 width: 10px; /* Ширина скроллбара */
 }
@@ -604,7 +611,6 @@ border-radius: 10px;
 background: #1370B9; /* Измененный цвет при наведении */
 }
 
-/* Добавляем медиазапрос для устройств с шириной экрана до 768px */
 @media (max-width: 768px) {
     .header {
         padding: 0.5em;
@@ -725,10 +731,6 @@ background: #1370B9; /* Измененный цвет при наведении 
         margin: 0.625em 0;
     }
 
-    .user-signature, .bot-signature {
-        font-size: 0.8em;
-    }
-
     .messageForm {
         padding-top: 0.8em;
     }
@@ -821,4 +823,9 @@ background: #1370B9; /* Измененный цвет при наведении 
         max-width: 30px; /* Максимальная ширина изображения */
         max-height: 30px; /* Максимальная высота изображения */
     }
-}
+
+    .custom-download-button {
+        /* Ваш стиль для кнопки */
+        font-size: 15px;
+    }
+}        
