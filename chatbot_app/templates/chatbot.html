@@ -377,9 +377,9 @@
         }
         
         .micro-btn:hover img {
-            content: url("{% static 'Micro_white.png' %}");
+            content: url("{% static 'icon/Micro_white.png' %}");
         }
-
+        
         .toggle-button {
             position: relative;
             overflow: hidden;
@@ -389,7 +389,7 @@
             background-color: #e7e9ed;
             transition: background-color 0.3s;
             border: none;
-          }
+        }
         
         .sun, .moon {
             position: absolute;
@@ -402,7 +402,7 @@
         
         .sun {
             left: 0;
-            background: url('{% static "sun2.png" %}') no-repeat center;
+            background: url('{% static "icon/sun2.png" %}') no-repeat center;
             background-size: cover;
             background-color: #ffffff; /* Добавляем белую подложку для иконки солнца */
             border: 3px solid #ffffff;
@@ -411,12 +411,12 @@
         
         .moon {
             left: 40px;
-            background: url('{% static "moon2.png" %}') no-repeat center;
+            background: url('{% static "icon/moon2.png" %}') no-repeat center;
             background-size: cover;
             background-color: #232935;
             border: 3px solid #232935;
             margin-right: 1px;
-        }
+        }        
 
         /* Стили для стрелочки */
         .scroll-to-bottom {
@@ -867,12 +867,12 @@
             <button class="menu-button" id="menuButton"></button>
             <div class="inputContainer">
                 <input type="text" class="messageInput" id="messageInput" name="message" placeholder="Введите запрос">
-                <img src="{% static "search_icon.png" %}" class="inputIcon" alt="search icon">
+                <img src="{% static "icon/search_icon.png" %}" class="inputIcon" alt="search icon">
             </div>            
-            <button id="mic" class="micro-btn" type="button"><img src="{% static 'Micro1.png' %}"></button>
+            <button id="mic" class="micro-btn" type="button"><img src="{% static 'icon/Micro1.png' %}"></button>
             <button type="submit" class="submitBtn" id="submitBtn">
                 <span class="text">Отправить</span>
-                <span id="vec" class="icon"><img src="{% static 'Vector3.png' %}"></span>
+                <span id="vec" class="icon"><img src="{% static 'icon/Vector3.png' %}"></span>
             </button>
         </form>
         <div class="scroll-to-bottom fixed" id="scrollToBottom">
@@ -889,7 +889,7 @@
     <script src="{% static 'js/Micro.js' %}"></script>
     <script src="{% static 'js/Menu.js' %}"></script>
     <script>
-        const darkCssPath = "{% static 'css/dark23.css' %}";
+        const darkCssPath = "{% static 'css/dark.css' %}";
         const lightCssPath = "{% static 'css/light.css' %}";
 
         toggleButton.addEventListener('click', function() {

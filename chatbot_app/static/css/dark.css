@@ -348,7 +348,7 @@ br {
 }
 
 .micro-btn:hover img {
-    content: url("static/Micro_white.png");
+    content: url("/static/icon/Micro_white.png");
 }
 
 .toggle-button {
@@ -373,7 +373,7 @@ br {
 
 .sun {
     left: 0;
-    background: url("static/sun2.png") no-repeat center;
+    background: url("/static/icon/sun2.png") no-repeat center;
     background-size: cover;
     background-color: #ffffff; /* Добавляем белую подложку для иконки солнца */
     border: 3px solid #ffffff;
@@ -382,7 +382,7 @@ br {
 
 .moon {
     left: 40px;
-    background: url("static/moon2.png") no-repeat center;
+    background: url("/static/icon/moon2.png") no-repeat center;
     background-size: cover;
     background-color: #232935;
     border: 3px solid #232935;
