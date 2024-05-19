@@ -8,9 +8,6 @@ const toggleButton = document.getElementById('theme-toggle');
 const icon = document.getElementById('icon');
 
 document.addEventListener("DOMContentLoaded", function() {
-    const messageForm = document.getElementById('messageForm');
-    const messageInput = document.getElementById('messageInput');
-    const chatbox = document.getElementById('chatbox');
 
     // Загрузка сообщений из Session Storage
     const savedMessages = JSON.parse(sessionStorage.getItem('chatMessages')) || [];
