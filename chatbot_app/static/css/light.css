@@ -361,7 +361,7 @@ br {
 }
 
 .micro-btn:hover img {
-    content: url('icon/Micro_white.png');
+    content: url('/static/icon/Micro_white.png');
 }
 
 .toggle-button {
@@ -373,7 +373,7 @@ br {
     background-color: #e7e9ed;
     transition: background-color 0.3s;
     border: none;
-  }
+}
 
 .sun, .moon {
     position: absolute;
@@ -386,7 +386,7 @@ br {
 
 .sun {
     left: 0;
-    background: url("icon/sun2.png") no-repeat center;
+    background: url("/static/icon/sun2.png") no-repeat center;
     background-size: cover;
     background-color: #ffffff; /* Добавляем белую подложку для иконки солнца */
     border: 3px solid #ffffff;
@@ -395,12 +395,12 @@ br {
 
 .moon {
     left: 40px;
-    background: url("icon/moon2.png") no-repeat center;
+    background: url("/static/icon/moon2.png") no-repeat center;
     background-size: cover;
     background-color: #232935;
     border: 3px solid #232935;
     margin-right: 1px;
-}
+}        
 
 /* Стили для стрелочки */
 .scroll-to-bottom {
@@ -828,4 +828,4 @@ background: #1370B9; /* Измененный цвет при наведении 
         /* Ваш стиль для кнопки */
         font-size: 15px;
     }
-}        
+}

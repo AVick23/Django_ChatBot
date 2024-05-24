@@ -231,9 +231,9 @@ for (let button of all_buttons) {
                                             infoIcon.textContent = 'i';
                                     
                                             const modal = document.createElement('div');
-                                            modal.className = 'modal';
+                                            modal.className = 'my-custom-modal';
                                             const modalContent = document.createElement('div');
-                                            modalContent.className = 'modal-content';
+                                            modalContent.className = 'my-text-container';
                                             modalContent.textContent = all_search_types[j].description;
                                             modal.appendChild(modalContent);
                                             document.body.appendChild(modal);
@@ -255,7 +255,6 @@ for (let button of all_buttons) {
                                         }
                                     
                                         searchMessage.appendChild(searchContainer); // Добавляем контейнер в сообщение
-                                        searchMessage.appendChild(document.createElement('br'));
                                     }
                                     
                                     // Добавляем подпись и сообщение типов поиска к чату
@@ -536,8 +535,7 @@ for (let button of all_buttons) {
         
         // Массив имен файлов изображений
         var imageNames = [
-            'Frame-10.png',
-            'The_main_building.png'
+            'Plan.png'
         ];
         
         // Создаем сообщение с изображениями
@@ -554,7 +552,7 @@ for (let button of all_buttons) {
         downloadButton.appendChild(iconElement); // Добавляем иконку в кнопку
         downloadButton.setAttribute('class', 'my-custom-button custom-download-button'); // Используем ваши классы стилизации кнопки
         downloadButton.style.display = "none"; // Начинаем с ее скрытия
-
+    
         // Добавляем кнопку в модальное окно
         var modal = document.getElementById('myCustomModal');
         modal.appendChild(downloadButton);
@@ -588,7 +586,19 @@ for (let button of all_buttons) {
             imagesContainer.appendChild(imageElement);
         });
         
-        // Добавляем контейнер с изображениями в сообщение
+        // Создаем текстовое сообщение
+        var textMessage = document.createElement('p');
+        textMessage.textContent = 'Вот план-схема корпусов и ссылка на навигатор:';
+    
+        // Создаем ссылку
+        var linkElement = document.createElement('a');
+        linkElement.href = 'https://nav.donstu.ru/navigator';
+        linkElement.textContent = 'Перейти к навигатору';
+        linkElement.setAttribute('class', 'my-navigation-link');
+        
+        // Добавляем текст и ссылку в сообщение
+        imageMessage.appendChild(textMessage);
+        imageMessage.appendChild(linkElement);
         imageMessage.appendChild(imagesContainer);
         
         // Добавляем сообщение с изображениями в чат
@@ -604,7 +614,7 @@ for (let button of all_buttons) {
         if (event.target === modal || event.target.classList.contains('my-close')) {
             modal.style.display = "none";
         }
-    });   
+    });       
 
     document.getElementById('button5').addEventListener('click', function(event) {
         event.preventDefault();
