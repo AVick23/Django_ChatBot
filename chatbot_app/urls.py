@@ -18,4 +18,8 @@ urlpatterns = [
     path('handle_question/', handle_question, name='handle_question'),
     path('upload_file/', views.upload_file, name='upload_file'),
     path('progress/', views.progress, name='progress/'),
+    path('login/', views.handle_login, name='handle_login'),
+    path('new_site/', views.new_site, name='new_site'),
+    path('get_unresolved_questions/', views.get_unresolved_questions_view, name='get_unresolved_questions'),
+    path('save_answer/', views.save_answer_view, name='save_answer'),
 ]

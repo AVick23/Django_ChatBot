@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Чат</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <script>
+        // Определение переменной с путем к изображениям
+        var staticImagePath = "{% static 'images/' %}";
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Golos&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="header">
+        <div>
+            <a href="https://donstu.ru/" class="menu-link">Главная страница</a>
+            <a href="https://news.donstu.ru/" class="menu-link">Медиапортал</a>
+            <a href="https://donstu.ru/university/services/" class="menu-link">Сервисы</a>
+        </div>
+        <button id="theme-toggle" class="toggle-button">
+            <i id="icon" class="sun"></i>
+          </button>
+    </div>
+    <div class="chat-container">
+        <div class="chatbox" id="chatbox">
+        </div>
+        <form class="messageForm" id="messageForm" method="post">
+            {% csrf_token %}
+            <button class="menu-button" id="menuButton"></button>
+            <div class="inputContainer">
+                <input type="text" class="messageInput" id="messageInput" name="message" placeholder="Введите запрос">
+                <img src="{% static "icon/search_icon.png" %}" class="inputIcon" alt="search icon">
+            </div>            
+            <button id="mic" class="micro-btn" type="button"><img src="{% static 'icon/Micro1.png' %}"></button>
+            <button type="submit" class="submitBtn" id="submitBtn">
+                <span class="text">Отправить</span>
+                <span id="vec" class="icon"><img src="{% static 'icon/Vector3.png' %}"></span>
+            </button>
+        </form>
+        <div class="scroll-to-bottom fixed" id="scrollToBottom">
+            <i class="fa fa-arrow-down"></i>
+        </div>
+        <!-- Ваш HTML-код -->
+        <div id="myCustomModal" class="my-custom-modal">
+            <span class="my-close">&times;</span>
+            <img class="my-modal-content" id="myModalImg">
+        </div>
+    </div>
+    <script src="{% static 'js/Scriptss.js' %}"></script>
+    <script src="{% static 'js/For_messages.js' %}"></script>
+    <script src="{% static 'js/Micro.js' %}"></script>
+    <script src="{% static 'js/Menu_new.js' %}"></script>
+    <script>
+        const darkCssPath = "{% static 'css/dark.css' %}";
+        const lightCssPath = "{% static 'css/light.css' %}";
+
+        toggleButton.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+            document.documentElement.setAttribute('data-theme', newTheme);
+        
+            // Удаляем старый стиль, если он существует
+            const oldStyle = document.getElementById('theme-style');
+            if (oldStyle) {
+                document.head.removeChild(oldStyle);
+            }
+        
+            // Создаем новый стиль
+            const style = document.createElement('style');
+            style.id = 'theme-style';
+        
+            // Определяем путь к файлу стилей в зависимости от выбранной темы
+            const cssFilePath = newTheme === 'dark' ? darkCssPath : lightCssPath;
+        
+            // Загружаем новый стиль
+            fetch(cssFilePath)
+                .then(response => response.text())
+                .then(css => {
+                    style.textContent = css;
+                    document.head.appendChild(style);
+                });
+        
+            // Меняем иконку в зависимости от выбранной темы
+            if (newTheme === 'dark') {
+                icon.classList.remove('sun');
+                icon.classList.add('moon');
+                icon.style.left = '35px';
+            } else {
+                icon.classList.remove('moon');
+                icon.classList.add('sun');
+                icon.style.left = '0';
+            }
+        });
+    </script>
+</body>
+</html>

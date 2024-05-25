@@ -13,6 +13,8 @@ from tempfile import TemporaryDirectory
 from py_files.NLP import question_answer_pairs
 from py_files.searh_directions import search_directions_strict, search_directions_flexible, get_direction_data, search_similar_questions
 from py_files.save_questions import save_question_to_db, get_answer_for_question
+import py_files.login
+from py_files.get_questions import get_unresolved_questions, reg_answer
 
 db_path = "university.sqlite"
 
@@ -24,6 +26,12 @@ def chat(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         user_message = data.get('message')
+
+        # Кодовое слово
+        secret_code = "секрет"
+
+        if user_message == secret_code:
+            return JsonResponse({'secretCodeMatched': True})
 
         # Анализ текста пользователя с использованием Spacy
         user_message_doc = nlp(user_message.lower())
@@ -55,6 +63,25 @@ def chat(request):
     
     # Возврат шаблона для GET-запросов
     return render(request, 'chatbot.html')
+
+@csrf_exempt
+def handle_login(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+
+        # Проверяем совпадение логина и пароля
+        if username == py_files.login.correct_username and password == py_files.login.correct_password:
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False})
+
+    return JsonResponse({'error': 'Метод запроса не поддерживается'})
+
+def new_site(request):
+    # Здесь вы можете добавить любую логику, которую хотите выполнить перед отображением страницы
+    return render(request, 'new_site.html') 
 
 @csrf_exempt
 def get_chat_history(request):
@@ -237,3 +264,21 @@ def progress(request):
                 yield f"data: 0/0\n\n"
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+def get_unresolved_questions_view(request):
+    unresolved_questions = get_unresolved_questions()
+    questions = [{'id': q[0], 'question_text': q[1]} for q in unresolved_questions]
+    return JsonResponse(questions, safe=False)
+
+@csrf_exempt
+def save_answer_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        question_id = data.get('question_id')
+        answer_text = data.get('answer')
+
+        # Сохранение ответа в базе данных
+        reg_answer(question_id, answer_text)
+
+        return JsonResponse({'message': 'Ответ сохранен.'})
+    return JsonResponse({'error': 'Invalid request method.'}, status=400)
