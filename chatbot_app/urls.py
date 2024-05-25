@@ -22,4 +22,6 @@ urlpatterns = [
     path('new_site/', views.new_site, name='new_site'),
     path('get_unresolved_questions/', views.get_unresolved_questions_view, name='get_unresolved_questions'),
     path('save_answer/', views.save_answer_view, name='save_answer'),
+    path('process_questions_file/', views.process_questions_file, name='process_questions_file'),
+    path('upload_txt_file/', views.upload_txt_file, name='upload_txt_file'),
 ]

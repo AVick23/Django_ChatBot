@@ -1,8 +1,3 @@
-import spacy
-
-# Загрузка языковой модели Spacy
-nlp = spacy.load('ru_core_news_lg')
-
 def read_questions_answers(file_path):
     pairs = []
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -14,3 +9,11 @@ def read_questions_answers(file_path):
 
 # Загрузка вопрос-ответных пар из файла
 question_answer_pairs = read_questions_answers('context2.txt')
+
+# # Ручное создание списка словарей вопрос-ответов
+# question_answer_pairs = [
+#     {'question': 'Как тебя зовут?', 'answer': 'Меня зовут бот.'},
+#     {'question': 'Сколько тебе лет?', 'answer': 'Мне несколько месяцев.'},
+#     {'question': 'Где ты живешь?', 'answer': 'Я живу в облаке данных.'},
+#     # Добавьте сюда любые другие пары вопросов и ответов
+# ]

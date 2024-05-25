@@ -15,6 +15,8 @@ from py_files.searh_directions import search_directions_strict, search_direction
 from py_files.save_questions import save_question_to_db, get_answer_for_question
 import py_files.login
 from py_files.get_questions import get_unresolved_questions, reg_answer
+from questions import filter_sentences
+from django.core.files.storage import FileSystemStorage
 
 db_path = "university.sqlite"
 
@@ -28,7 +30,7 @@ def chat(request):
         user_message = data.get('message')
 
         # Кодовое слово
-        secret_code = "секрет"
+        secret_code = "Секрет"
 
         if user_message == secret_code:
             return JsonResponse({'secretCodeMatched': True})
@@ -282,3 +284,37 @@ def save_answer_view(request):
 
         return JsonResponse({'message': 'Ответ сохранен.'})
     return JsonResponse({'error': 'Invalid request method.'}, status=400)
+
+@csrf_exempt
+def process_questions_file(request):
+    if request.method == 'GET':
+        file_path = 'questions.txt'
+        output_file = 'questions_new.txt'
+        
+        filter_sentences(file_path, output_file)
+
+        with open(output_file, 'rb') as file:
+            response = HttpResponse(file.read(), content_type='text/plain')
+            response['Content-Disposition'] = f'attachment; filename={os.path.basename(output_file)}'
+            return response
+    
+@csrf_exempt
+def upload_txt_file(request):
+    if request.method == 'POST' and request.FILES.get('file'):
+        txt_file = request.FILES['file']
+        if txt_file.name != 'questions.txt':
+            return JsonResponse({'message': 'Имя файла должно быть "questions.txt".'}, status=400)
+
+        fs = FileSystemStorage()
+        filename = 'questions.txt'
+        file_path = fs.path(filename)
+
+        # Удаляем существующий файл, если он есть
+        if os.path.exists(file_path):
+            os.remove(file_path)
+
+        # Сохраняем новый файл
+        fs.save(filename, txt_file)
+
+        return JsonResponse({'message': 'Файл успешно загружен и заменён.'})
+    return JsonResponse({'message': 'Ошибка при загрузке файла'}, status=400)
